@@ -1,7 +1,7 @@
 <template>
 	<div id="app">
 		<div class="solution-panel" v-for="solution in solutions">
-			{{ solution.title }}
+			{{ solution.description }}
 		</div>
 	</div>
 </template>
@@ -16,16 +16,9 @@ export default {
 	},
 
 	created() {
-		this.solutions = [
-				{
-					title: 'solution 1',
-					description: 'description 1',
-				},
-				{
-					title: 'solution 2',
-					description: 'description 2'
-				},
-			]
+		this.$http.get('http://localhost:8080/resolutions')
+      		.then(res => res.json())
+      		.then(solutions => this.solutions = solutions, err => console.log(err));
 	}
 }
 </script>
