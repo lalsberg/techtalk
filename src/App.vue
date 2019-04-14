@@ -11,17 +11,21 @@ export default {
 	name: 'app',
 	data () {
 		return {
-			solutions: [
+			solutions: []
+		}
+	},
+
+	created() {
+		this.solutions = [
 				{
 					title: 'solution 1',
 					description: 'description 1',
 				},
 				{
 					title: 'solution 2',
-					description: 'description 2',
+					description: 'description 2'
 				},
 			]
-		}
 	}
 }
 </script>
