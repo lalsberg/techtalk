@@ -11,7 +11,7 @@
 
 
 <script>
-	import Solution from '../../components/Solution.vue';
+	import Solution from '../../components/solution/Solution.vue';
 
 	export default {
 		name: 'home',
