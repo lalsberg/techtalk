@@ -1,7 +1,6 @@
 <template>
 	<div>
 		<input type="search" class="filter" placeholder="Filter solutions" v-on:input="filter = $event.target.value">
-		{{ filter }}
 
 		<div class="solution-panel" v-for="solution in filteredSolutions">
 			<the-solution :solution="solution"/>
@@ -16,9 +15,9 @@
 	export default {
 		name: 'home',
 
-	    components: {
-	        'the-solution': Solution
-	    },
+		components: {
+			'the-solution': Solution
+		},
 
 		data () {
 			return {
@@ -39,8 +38,8 @@
 
 		created() {
 			this.$http.get('http://localhost:8080/resolutions')
-	      		.then(res => res.json())
-	      		.then(solutions => this.solutions = solutions, err => console.log(err));
+				.then(res => res.json())
+				.then(solutions => this.solutions = solutions, err => console.log(err));
 		}
 	}
 </script>
@@ -53,6 +52,11 @@
 
 	.filter {
 		display: block;
-		width: 100%;
+		width: 39%;
+		-webkit-appearance:textfield;
+		box-sizing: content-box;
+		line-height: 20px;
+		padding: 20px 10px;
+		margin: 0 auto
 	}
 </style>
