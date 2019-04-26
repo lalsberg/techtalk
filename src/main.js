@@ -5,6 +5,13 @@ import VueRouter from 'vue-router';
 
 import { routes } from './routes';
 
+import VueHighlightJS from 'vue-highlightjs'
+Vue.use(VueHighlightJS)
+
+
+import 'highlight.js/styles/default.css';
+
+
 Vue.use(VueRouter);
 
 const router = new VueRouter({

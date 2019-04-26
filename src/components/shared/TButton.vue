@@ -9,9 +9,7 @@
     export default {
         methods: {
             clickIt: function() {
-                if (confirm("Confirma?")) {
-                    this.$emit("buttonClicked");
-                }
+                this.$emit("buttonClicked");
             }
         }
     }

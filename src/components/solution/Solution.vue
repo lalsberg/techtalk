@@ -12,27 +12,47 @@
 		<div class="frequency">
 			<p class="mg-font-bold total-value-desc">Frequência:</p>
 			<p class="mg-font-bold mg-font-size-xl real-value"> {{ solution.frequency }} </p>
+			<tbutton @buttonClicked="incrementFrequency(solution)" class="btn-increment-frequency">
+				<i class="material-icons">exposure_plus_1</i>
+			</tbutton>
 		</div>
 
 	</div>
 </template>
 
 <script>
+import TButton from '../shared/TButton.vue'
+
 export default {
 	name: 'Solution',
+	
 
     props: {
         solution: {
             required: true
         }
+    },
+
+    components: {
+    	'tbutton': TButton
+    },
+
+    methods: {
+    	incrementFrequency: function(solution) {
+    		this.$http.post('http://localhost:8080/solution/' + solution.id + '/frequency')
+					.then(function(response) {
+						console.log(response);
+						this.solution.frequency++;
+					}
+					, err => {this.sending = false; console.log(err)});
+    	}
     }
 }
 </script>
 
 <style>
 	.frequency {
-	    padding: 10px;
-	    margin-top: 10px;
+	    padding: 0.9em;
 	    border-top: 1px solid silver;
 	}
 
@@ -44,7 +64,7 @@ export default {
 	}
 
 	.mg-font-size-xl {
-	    font-size: 1.5rem;
+	    font-size: 1.3rem;
 	}
 
 	pre {
@@ -62,23 +82,17 @@ export default {
 	    border-color: rgb(221, 221, 221);
 	    border-top-left-radius: 6px;
 	    border-top-right-radius: 6px;
-	    padding: 10px 15px;
+	    padding: 1em 1em;
 	    border-bottom: 1px solid silver;
 	}
 
 	.solution {
+		box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
 	    font-family: helvetica_neue_lt_std45_light,sans-serif;
 	    color: #555;
 	}
 
-	.solution-description li {		
-		display: list-item;
-		text-align: -webkit-match-parent;
-		margin: 50px 0;
-	}
-
 	.solution {
-		width: 90%;
 		border: 1px solid silver;
     	border-radius: .4rem;
     	margin: 10px 0;
@@ -87,22 +101,16 @@ export default {
 		margin-top: 1em;
 	}
 
-	@media (min-width: 1024px) {
-		.solution {
-			width: 40%;
-		}
-	}
-
 	.total-value-desc {
 		display: inline-block;
 	}
+
 	.real-value {
 		display: inline-block;
 	}
 
 	.solution-description {
-		padding: 0 1.4rem;
-		list-style-type: none;
+		padding: 0 1.4rem;	
 	}
 
 	.solution-description span, .frequency {
@@ -110,10 +118,11 @@ export default {
 	}
 
 	.mg-font-bold {
-	    font-weight: 400;;
+	    font-weight: 400;
 	}
 
-	.mg-font-size-sm {
-		font-size: 1.2rem;
+	.btn-increment-frequency {
+		float: right;
 	}
+
 </style>

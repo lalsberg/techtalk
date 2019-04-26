@@ -4,9 +4,11 @@
 		<div class="underline"></div>
 		<div class="underline"></div>
 		<div class="underline"></div>
-		<div v-for="(route, index) in rotas" @click="ul(index)" class="element">
+		<div v-for="(route, index) in rotas" @click="ul(index)" class="external-element">
 			<router-link :to="route.path ? route.path : '/'">
-				{{route.theTitle}}
+				<div class="element">
+					{{route.theTitle}}
+				</div>
 			</router-link>
 		</div>
 	</nav>
@@ -41,6 +43,31 @@
 </script>
 
 <style scoped>
+	.external-element {
+		display: inline-block;
+		z-index: 10;
+		width: 20%;
+		text-align: center;
+		cursor: pointer;
+	}
+	.element {
+		display: inline-block;
+		z-index: 10;
+		width: 100%;
+		padding: 1em 0;
+		text-align: center;
+		cursor: pointer;
+	}
+
+	.element a {
+		cursor: pointer;
+		text-decoration: none;
+	}
+
+	a:hover, a:visited, a:hover, a:link {
+	  color: rgba(1, 1, 1, 1);
+	}
+
 	nav {
 		--underline-height: .5em;
 		--transition-duration: .5s;
@@ -82,23 +109,5 @@
 	}
 	.underline:nth-child(3) {
 		background: magenta;
-	}
-
-	.element {
-		display: inline-block;
-		z-index: 10;
-		width: 20%;
-		padding: 1em 0;
-		text-align: center;
-		cursor: pointer;
-	}
-
-	.element a {
-		cursor: pointer;
-		text-decoration: none;
-	}
-
-	a:hover, a:visited, a:hover, a:link {
-	  color: rgba(1, 1, 1, 1);
 	}
 </style>
